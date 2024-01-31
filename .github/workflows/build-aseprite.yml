@@ -41,7 +41,7 @@ jobs:
         fi
         if [[ "${{ runner.os }}" == "macOS" ]] ; then
         curl -L https://github.com/aseprite/skia/releases/download/m102-861e4743af/Skia-macOS-Release-x64.zip --output /tmp/skia.zip 
-        unzip -d $HOME/deps/skia /tmp/skia.zip
+        unzip -d /tmp/skia /tmp/skia.zip
         fi      
     - name: Generating Makefiles
       shell: bash
@@ -58,9 +58,9 @@ jobs:
           -DCMAKE_OSX_DEPLOYMENT_TARGET=10.9 \
           -DCMAKE_OSX_SYSROOT=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk \
           -DLAF_BACKEND=skia \
-          -DSKIA_DIR=$HOME/deps/skia \
-          -DSKIA_LIBRARY_DIR=$HOME/deps/skia/out/Release-x64 \
-          -DSKIA_LIBRARY=$HOME/deps/skia/out/Release-x64/libskia.a \
+          -DSKIA_DIR=/tmp/skia \
+          -DSKIA_LIBRARY_DIR=/tmp/skia/out/Release-x64 \
+          -DSKIA_LIBRARY=/tmp/skia/out/Release-x64/libskia.a \
           -G Ninja \
           ..
         fi
